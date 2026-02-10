@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Minimalne ToDo</title>
+
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  
+  <section class="hero">
+    <h1>MyTasks</h1>
+    <div class="hero-nav">
+      <button data-view="todo" class="active">Zadania</button>
+      <button data-view="calendar">Kalendarz</button>
+      <button data-view="o-aplikacji">O aplikacji</button>
+    </div>
+  </section>
+
+  
+  <div class="page">
+
+    
+    <div id="todo" class="view active">
+      <div class="card">
+        <form id="todo-form">
+          <input id="todo-input" type="text" placeholder="Treść zadania">
+          <input id="todo-date" type="date">
+          <input id="todo-time" type="time">
+          <button type="submit">Dodaj</button>
+        </form>
+        <ul id="todo-list"></ul>
+        <div class="bottom-bar">
+          <span id="counter"></span>
+          <button id="clear-completed">Wyczyść ukończone</button>
+        </div>
+      </div>
+    </div>
+
+    
+    <div id="calendar" class="view">
+      <div class="card">
+        <div class="calendar-header">
+          <button id="prev-month">‹</button>
+          <h3 id="calendar-title"></h3>
+          <button id="next-month">›</button>
+        </div>
+        <div class="calendar-weekdays">
+          <div>Pn</div><div>Wt</div><div>Śr</div><div>Cz</div>
+          <div>Pt</div><div>Sb</div><div>Nd</div>
+        </div>
+        <div id="calendar-grid" class="calendar-grid"></div>
+        <div id="day-tasks"></div>
+      </div>
+    </div>
+
+    
+    <div id="o-aplikacji" class="view">
+      <div class="card">
+        <h2>Geolokalizacja</h2>
+        <button id="geo-btn">Pokaż lokalizację</button>
+        <p id="geo-output"></p>
+        <h2>Powiadomienia</h2>
+        <div class="toggle-row">
+          <span class="toggle-label">Powiadomienia</span>
+        
+          <label class="switch">
+            <input type="checkbox" id="notif-toggle">
+            <span class="slider"></span>
+          </label>
+        </div>
+        
+        <p id="notif-status" class="toggle-status"></p>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="app.js" type="module"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('./sw.js')
+      .then(() => console.log('SW zarejestrowany'))
+      .catch(err => console.error('Błąd SW:', err));
+    }
+  </script>
+</body>
+</html>
